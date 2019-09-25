@@ -9,14 +9,33 @@ public class OpenDoor : MonoBehaviour
 
     private bool _colidindo;
     private bool _portaAbera = false;
+    public bool isLeft = true;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && _colidindo)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            _portaAbera = true;
-            this.gameObject.SetActive(false);
-            this.gameObject.GetComponent<PlayerBehaviour>().pickUpUI.SetActive(false);
+            if (_colidindo && _portaAbera == false)
+            {
+
+                _portaAbera = true;
+                if (isLeft)
+                {
+                    this.gameObject.transform.Rotate(0, -90, 0);
+                }
+                else
+                {
+                    this.gameObject.transform.Rotate(0, 90, 0);
+                }
+                
+
+                //this.gameObject.SetActive(false);
+                //this.gameObject.GetComponent<PlayerBehaviour>().pickUpUI.SetActive(false);
+            }
+            else if (_colidindo && _portaAbera == true)
+            {
+                this.gameObject.transform.Rotate(0, 0, 0);
+            }
         }
     }
 
